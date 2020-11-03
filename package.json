@@ -23,9 +23,11 @@
     "react-slot-machine": "^1.0.0"
   },
   "scripts": {
+    "heroku-prebuild": "cd backend && npm install && npm run build && cd ..",
     "start-js": "react-scripts start",
     "backend-start": "node backend/server.js",
     "start": "concurrently \"npm-run-all -p backend-start start-js\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
