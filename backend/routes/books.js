@@ -3,7 +3,7 @@ let Book = require('../models/book.model');
 const multer = require('multer');
 
 let storage = multer.diskStorage({
-  destination: './public/uploads',
+  destination: './build/uploads',
   filename: function(req, file, cb) {
     cb(null, new Date().toISOString().replace(/:/g,'-')+file.originalname);
   }
