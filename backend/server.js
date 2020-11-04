@@ -22,15 +22,11 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 });
 
-// if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+
   app.use(express.static(path.join(__dirname, '../build')))
   app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../build'))
+      res.sendFile(path.join(__dirname, '../build'), 'index.html')
   })
-// } else {
-  //app.use(express.static('./public'));
-// }
-
 
 const booksRouter = require('./routes/books');
 const authorsRouter = require('./routes/authors');
