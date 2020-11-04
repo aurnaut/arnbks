@@ -36,7 +36,6 @@ class RandomBook extends Component {
 
 
   componentDidUpdate() {
-    console.log(this.state);
 
     document.getElementById('ceva').querySelectorAll('li').forEach(element => {
       if(element.classList.contains('selected-book')) {

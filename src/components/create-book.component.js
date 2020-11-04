@@ -130,9 +130,12 @@ export default class CreateBook extends Component {
     book.append("cover", cover);
 
 
-    axios.post('/api/books/add', book);
-
-    window.location = '/books';
+    axios.post('/api/books/add', book)
+    .then(res => {
+      if(res){
+        this.props.history.push('/books');
+      }
+    })
   }
 
   render() {
@@ -212,7 +215,7 @@ export default class CreateBook extends Component {
               name="cover"
               className="form-control"
               onChange={this.onChangeCover}
-              />s
+              />
           <img style={{maxWidth:100}} src={this.state.showImage} alt={this.state.title} />
         </div>
 

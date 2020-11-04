@@ -44,19 +44,12 @@ export default class BooksList extends Component {
   }
 
   deleteBook(id) {
-    axios.delete('/api/books/'+id)
-      .then(response => { console.log(response.data)});
+    axios.delete('/api/books/'+id);
 
     this.setState({
       data: this.state.data.filter(el => el._id !== id)
     })
   }
-
-  // bookList() {
-  //   return this.state.data.map(currentbook => {
-  //     return <Book data={this.state.data} book={currentbook} deleteBook={this.deleteBook} key={currentbook._id} />;
-  //   })
-  // }
 
   handleChange = (event) => {
     const { value } = event.target;
@@ -85,21 +78,10 @@ export default class BooksList extends Component {
     arrayCopy.sort(this.compareBy(key));
     this.setState({data: arrayCopy});
     this.setState({ascSort: !this.state.ascSort});
-    console.log(this.state.ascSort)
   }
 
   render() {
-    console.log(this.state.data);
     const { data, value } = this.state;
-  //   const data2 = this.state.data.sort(function(a, b) {
-  //     var textA = a.title.toUpperCase();
-  //     var textB = b.title.toUpperCase();
-  //     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-  // });
-    // const bookss = this.state.data;
-    // var onlyVV =  bookss.filter(function(book) {
-    //   return book.pages >= 235;
-    // });
 
     return (
       <div>
@@ -120,7 +102,6 @@ export default class BooksList extends Component {
             </tr>
           </thead>
           <tbody>
-            {/* { this.bookList() } */}
             <FilterResults
               value={value}
               data={data}

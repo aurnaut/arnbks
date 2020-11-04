@@ -26,10 +26,12 @@ export default class CreateAuthor extends Component {
       name: this.state.name
     }
 
-    console.log(name);
-
     axios.post('/api/authors/add', name)
-      .then(res => console.log(res.data));
+    .then(res => {
+      if(res){
+        this.props.history.push('/');
+      }
+    })
 
     this.setState({
       name: ''

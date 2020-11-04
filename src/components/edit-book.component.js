@@ -124,13 +124,11 @@ export default class EditBook extends Component {
 
 
     axios.put('/api/books/update/' + this.props.match.params.id, book,)
-      .then(res => {
-        if(res){
-          this.props.history.push('/books');
-        }
-      })
-
-
+    .then(res => {
+      if(res){
+        this.props.history.push('/books');
+      }
+    })
   }
 
   render() {
