@@ -34,7 +34,7 @@ export default class BooksList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/books/')
+    axios.get('/books/')
       .then(response => {
         this.setState({ data: response.data })
       })
@@ -44,7 +44,7 @@ export default class BooksList extends Component {
   }
 
   deleteBook(id) {
-    axios.delete('http://localhost:5000/books/'+id)
+    axios.delete('/books/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({

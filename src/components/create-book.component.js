@@ -37,7 +37,7 @@ export default class CreateBook extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/authors/')
+    axios.get('/authors/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -117,7 +117,7 @@ export default class CreateBook extends Component {
     e.preventDefault();
 
     let book = new FormData();
-    const { title, author, description, pages, date, cover, readByMar, readByAnd, currentlyReadingMar, currentlyReadingAnd } = this.state;
+    const { title, author, description, pages, date, cover, readByMar } = this.state;
     book.append("title", title);
     book.append("author", author);
     book.append("readByMar", readByMar);
@@ -130,7 +130,7 @@ export default class CreateBook extends Component {
     book.append("cover", cover);
 
 
-    axios.post('http://localhost:5000/books/add', book);
+    axios.post('/books/add', book);
 
     window.location = '/books';
   }
@@ -212,8 +212,8 @@ export default class CreateBook extends Component {
               name="cover"
               className="form-control"
               onChange={this.onChangeCover}
-              />
-          <img style={{maxWidth:100}} src={this.state.showImage} />
+              />s
+          <img style={{maxWidth:100}} src={this.state.showImage} alt={this.state.title} />
         </div>
 
         <div className="form-group">

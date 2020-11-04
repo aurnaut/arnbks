@@ -31,7 +31,7 @@ export default class EditBook extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/books/'+this.props.match.params.id)
+    axios.get('/books/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           title: response.data.title,
@@ -48,7 +48,7 @@ export default class EditBook extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:5000/authors/')
+    axios.get('/authors/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -123,7 +123,7 @@ export default class EditBook extends Component {
     book.append("id",id);
 
 
-    axios.put('http://localhost:5000/books/update/' + this.props.match.params.id, book,)
+    axios.put('/books/update/' + this.props.match.params.id, book,)
       .then(res => {
         if(res){
           this.props.history.push('/books');
