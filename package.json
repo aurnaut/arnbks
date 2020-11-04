@@ -23,7 +23,7 @@
     "react-slot-machine": "^1.0.0"
   },
   "scripts": {
-    "start": "node backend/server.js",
+    "start": "node backend/server.js && react-scripts start",
     "build": "react-scripts build",
     "heroku-postbuild": "npm install npm && npm run build && cd backend && npm install",
     "test": "react-scripts test",
