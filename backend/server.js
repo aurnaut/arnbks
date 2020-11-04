@@ -22,7 +22,11 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 });
 
-app.use(express.static('./public'));
+//app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build'))
+})
 
 const booksRouter = require('./routes/books');
 const authorsRouter = require('./routes/authors');
