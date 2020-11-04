@@ -21,7 +21,7 @@ class RandomBook extends Component {
 
 
   componentDidMount() {
-    axios.get('/books/')
+    axios.get('/api/books/')
       .then(response => {
         this.setState({ data: response.data })
       })

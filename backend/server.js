@@ -5,7 +5,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
 
-
 require('dotenv').config();
 
 const app = express();
@@ -32,8 +31,8 @@ app.get('*', (req, res) => {
 const booksRouter = require('./routes/books');
 const authorsRouter = require('./routes/authors');
 
-app.use('/books', booksRouter);
-app.use('/authors', authorsRouter);
+app.use('/api/books', booksRouter);
+app.use('/api/authors', authorsRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port:${port}`);
