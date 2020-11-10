@@ -21,28 +21,21 @@ connection.once('open', () => {
 });
 
 
-
-
-// app.use(express.static(path.join(__dirname, './build')))
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, './build'), 'index.html')
-// })
-
 const booksRouter = require('./routes/books');
 const authorsRouter = require('./routes/authors');
 
 app.use('/api/books', booksRouter);
 app.use('/api/authors', authorsRouter);
 
+
 app.use(express.static(path.join(__dirname, 'client', 'public')))
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static( 'client/build' ));
 
-  app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')); // relative path
-  });
-}
+app.use(express.static( 'client/build' ));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')); // relative path
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port:${port}`);
 })
