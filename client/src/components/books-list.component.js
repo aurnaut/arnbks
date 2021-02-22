@@ -11,7 +11,8 @@ const Book = props => (
     <td>{props.book.readByMar === true ? 'Yes': 'No'}</td>
     <td>{props.book.description}</td>
     <td>{props.book.pages}</td>
-    <td>{props.book.date.substring(0,10)}</td>
+    <td>{props.book.date}</td> 
+    {/* <td>{props.book.date.substring(0,10)}</td> */}
     <td>
       <Link to={"/edit/"+props.book._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBook(props.book._id) }}>delete</a>
     </td>
