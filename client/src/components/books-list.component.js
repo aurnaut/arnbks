@@ -7,12 +7,10 @@ const Book = props => (
   <tr>
     <td><img style={{maxWidth:100, border: '1px solid', borderRadius: 5}} src={'/uploads/'+ props.book.cover} /></td>
     <td>{props.book.title}</td>
-    <td>{props.book.author}</td>
+    <td>{props.book.category}</td>
     <td>{props.book.readByMar === true ? 'Yes': 'No'}</td>
     <td>{props.book.description}</td>
     <td>{props.book.pages}</td>
-    <td>{props.book.date}</td> 
-    {/* <td>{props.book.date.substring(0,10)}</td> */}
     <td>
       <Link to={"/edit/"+props.book._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBook(props.book._id) }}>delete</a>
     </td>
@@ -94,11 +92,10 @@ export default class BooksList extends Component {
             <tr>
               <th>Cover</th>
               <th onClick={() => this.sortBy('title')} >Title</th>
-              <th onClick={() => this.sortBy('author')} >Author</th>
+              <th onClick={() => this.sortBy('category')} >Category</th>
               <th onClick={() => this.sortBy('readByMar')}> Read By Marius</th>
               <th>Description</th>
               <th onClick={() => this.sortBy('pages')}>Pages</th>
-              <th>Date</th>
               <th>Actions</th>
             </tr>
           </thead>

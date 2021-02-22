@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const authorSchema = new Schema({
+const categorySchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -14,6 +14,6 @@ const authorSchema = new Schema({
   timestamps: true,
 });
 
-const Author = mongoose.model('Author', authorSchema);
+const Category = mongoose.model('Category', categorySchema);
 
-module.exports = Author;
+module.exports = Category;

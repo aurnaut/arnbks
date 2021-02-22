@@ -21,26 +21,18 @@ router.route('/').get((req, res) => {
 
 router.post('/add', upload.single('cover'), (req, res) => {
   const title = req.body.title;
-  const author = req.body.author;
+  const category = req.body.category;
   const readByMar = req.body.readByMar;
-  // const readByAnd = req.body.readByAnd;
-  // const currentlyReadingMar = req.body.currentlyReadingMar;
-  // const currentlyReadingAnd = req.body.currentlyReadingAnd;
   const description = req.body.description;
   const pages = Number(req.body.pages);
-  const date = Date.parse(req.body.date);
   const cover = (req.file) ? req.file.filename : null;
 
   const newBook = new Book({
     title,
-    author,
+    category,
     readByMar,
-    // readByAnd,
-    // currentlyReadingMar,
-    // currentlyReadingAnd,
     description,
     pages,
-    date,
     cover
   });
 
@@ -66,14 +58,10 @@ router.put('/update/:id', upload.single('cover'), (req, res) => {
     .then(book => {
       const coverUpdate = (req.file) ? req.file.filename : book.cover; //multer
       book.title = req.body.title;
-      book.author = req.body.author;
+      book.category = req.body.category;
       book.readByMar = req.body.readByMar;
-      // book.readByAnd = req.body.readByAnd;
-      // book.currentlyReadingMar = req.body.currentlyReadingMar;
-      // book.currentlyReadingAnd = req.body.currentlyReadingAnd;
       book.description = req.body.description;
       book.pages = Number(req.body.pages);
-      book.date = Date.parse(req.body.date);
       book.cover = coverUpdate;
       book.save()
         .then(() => res.json('Book updated!'))

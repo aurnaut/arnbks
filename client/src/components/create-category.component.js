@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class CreateAuthor extends Component {
+export default class CreateCategory extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeAuthor = this.onChangeAuthor.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -13,7 +13,7 @@ export default class CreateAuthor extends Component {
     }
   }
 
-  onChangeAuthor(e) {
+  onChangeCategory(e) {
     this.setState({
       name: e.target.value
     })
@@ -26,7 +26,7 @@ export default class CreateAuthor extends Component {
       name: this.state.name
     }
 
-    axios.post('/api/authors/add', name)
+    axios.post('/api/categories/add', name)
     .then(res => {
       if(res){
         this.props.history.push('/');
@@ -42,7 +42,7 @@ export default class CreateAuthor extends Component {
   render() {
     return (
       <div>
-        <h3>Create New Author</h3>
+        <h3>Create New Category</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
             <label>Name: </label>
@@ -50,11 +50,11 @@ export default class CreateAuthor extends Component {
                 required
                 className="form-control"
                 value={this.state.name}
-                onChange={this.onChangeAuthor}
+                onChange={this.onChangeCategory}
                 />
           </div>
           <div className="form-group">
-            <input type="submit" value="Create Author" className="btn btn-primary" />
+            <input type="submit" value="Create Category" className="btn btn-primary" />
           </div>
         </form>
       </div>

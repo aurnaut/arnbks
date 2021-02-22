@@ -19,7 +19,7 @@ export default class Navbar extends Component {
             <Link to="/random-book" className="nav-link">Random book</Link>
           </li>
           <li className="navbar-item">
-            <Link to="/author" className="nav-link">Add author</Link>
+            <Link to="/category" className="nav-link">Add category</Link>
           </li>
         </ul>
         </div>

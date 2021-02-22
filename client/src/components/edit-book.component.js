@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
 
 export default class EditBook extends Component {
   constructor(props) {
     super(props);
 
     this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeAuthor = this.onChangeAuthor.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeReadByMar = this.onChangeReadByMar.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePages = this.onChangePages.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
     this.onChangeCover = this.onChangeCover.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       title: '',
-      author: '',
+      category: '',
       readByMar: false,
       description: '',
       pages: 0,
-      date: new Date(),
       cover: null,
       isEditImage: false,
       showImage: '',
-      authors: []
+      categories: []
     }
   }
 
@@ -35,24 +31,23 @@ export default class EditBook extends Component {
       .then(response => {
         this.setState({
           title: response.data.title,
-          author: response.data.author,
+          category: response.data.category,
           readByMar: response.data.readByMar,
           description: response.data.description,
           pages: response.data.pages,
           showImage: response.data.cover,
-          cover: response.data.cover,
-          date: new Date(response.data.date)
+          cover: response.data.cover
         })
       })
       .catch(function (error) {
         console.log(error);
       })
 
-    axios.get('/api/authors/')
+    axios.get('/api/categories/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
-            authors: response.data.map(author => author.name)
+            categories: response.data.map(category => category.name)
           })
         }
       })
@@ -68,9 +63,9 @@ export default class EditBook extends Component {
     })
   }
 
-  onChangeAuthor(e) {
+  onChangeCategory(e) {
     this.setState({
-      author: e.target.value
+      category: e.target.value
     })
   }
 
@@ -92,12 +87,6 @@ export default class EditBook extends Component {
     })
   }
 
-  onChangeDate(date) {
-    this.setState({
-      date: date
-    })
-  }
-
   onChangeCover(e) {
     this.setState({
       cover: e.target.files[0],
@@ -111,14 +100,13 @@ export default class EditBook extends Component {
 
     let book = new FormData();
     
-    const { title, author, readByMar, description, pages, date, cover } = this.state;
+    const { title, category, readByMar, description, pages, cover } = this.state;
     const id = this.props.match.params.id;
     book.append("title", title);
-    book.append("author", author);
+    book.append("category", category);
     book.append("readByMar", readByMar);
     book.append("description", description);
     book.append("pages", pages);
-    book.append("date", date);
     book.append("cover", cover);
     book.append("id",id);
 
@@ -146,17 +134,17 @@ export default class EditBook extends Component {
               />
         </div>
         <div className="form-group"> 
-          <label>Author: </label>
-          <select ref="authorInput"
+          <label>Category: </label>
+          <select ref="categoryInput"
               required
               className="form-control"
-              value={this.state.author}
-              onChange={this.onChangeAuthor}>
+              value={this.state.category}
+              onChange={this.onChangeCategory}>
               {
-                this.state.authors.map(function(author) {
+                this.state.categories.map(function(category) {
                   return <option 
-                    key={author}
-                    value={author}>{author}
+                    key={category}
+                    value={category}>{category}
                     </option>;
                 })
               }
@@ -189,15 +177,6 @@ export default class EditBook extends Component {
               value={this.state.pages}
               onChange={this.onChangePages}
               />
-        </div>
-        <div className="form-group">
-          <label>Date: </label>
-          <div>
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.onChangeDate}
-            />
-          </div>
         </div>
 
         <div className="form-group">

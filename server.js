@@ -22,10 +22,10 @@ connection.once('open', () => {
 
 
 const booksRouter = require('./routes/books');
-const authorsRouter = require('./routes/authors');
+const categoriesRouter = require('./routes/categories');
 
 app.use('/api/books', booksRouter);
-app.use('/api/authors', authorsRouter);
+app.use('/api/categories', categoriesRouter);
 
 //Local usage
 app.use(express.static(path.join(__dirname, 'public')))

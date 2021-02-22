@@ -1,20 +1,20 @@
 
 const router = require('express').Router();
-let Author = require('../models/author.model');
+let Category = require('../models/category.model');
 
 router.route('/').get((req, res) => {
-  Author.find()
-    .then(authors => res.json(authors))
+  Category.find()
+    .then(categories => res.json(categories))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
   const name = req.body.name;
 
-  const newAuthor = new Author({name});
+  const newCategory = new Category({name});
 
-  newAuthor.save()
-    .then(() => res.json('Author added!'))
+  newCategory.save()
+    .then(() => res.json('Category added!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
