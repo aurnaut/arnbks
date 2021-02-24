@@ -21,16 +21,22 @@ router.route('/').get((req, res) => {
 
 router.post('/add', upload.single('cover'), (req, res) => {
   const title = req.body.title;
+  const author = req.body.author;
   const category = req.body.category;
+  const language = req.body.language;
   const readByMar = req.body.readByMar;
+  const readByAnd = req.body.readByAnd;
   const description = req.body.description;
   const pages = Number(req.body.pages);
   const cover = (req.file) ? req.file.filename : null;
 
   const newBook = new Book({
     title,
+    author,
     category,
+    language,
     readByMar,
+    readByAnd,
     description,
     pages,
     cover
@@ -58,8 +64,11 @@ router.put('/update/:id', upload.single('cover'), (req, res) => {
     .then(book => {
       const coverUpdate = (req.file) ? req.file.filename : book.cover; //multer
       book.title = req.body.title;
+      book.author = req.body.author;
       book.category = req.body.category;
+      book.language = req.body.language;
       book.readByMar = req.body.readByMar;
+      book.readByAnd = req.body.readByAnd;
       book.description = req.body.description;
       book.pages = Number(req.body.pages);
       book.cover = coverUpdate;

@@ -6,8 +6,11 @@ export default class EditBook extends Component {
     super(props);
 
     this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeAuthor = this.onChangeAuthor.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
+    this.onChangeLanguage = this.onChangeLanguage.bind(this);
     this.onChangeReadByMar = this.onChangeReadByMar.bind(this);
+    this.onChangeReadByAnd = this.onChangeReadByAnd.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePages = this.onChangePages.bind(this);
     this.onChangeCover = this.onChangeCover.bind(this);
@@ -15,8 +18,11 @@ export default class EditBook extends Component {
 
     this.state = {
       title: '',
+      author: '',
       category: '',
+      language: '',
       readByMar: false,
+      readByAnd: false,
       description: '',
       pages: 0,
       cover: null,
@@ -31,8 +37,11 @@ export default class EditBook extends Component {
       .then(response => {
         this.setState({
           title: response.data.title,
+          author: response.data.author,
           category: response.data.category,
+          language: response.data.language,
           readByMar: response.data.readByMar,
+          readByAnd: response.data.readByAnd,
           description: response.data.description,
           pages: response.data.pages,
           showImage: response.data.cover,
@@ -63,17 +72,35 @@ export default class EditBook extends Component {
     })
   }
 
+  onChangeAuthor(e) {
+    this.setState({
+      author: e.target.value
+    })
+  }
+
   onChangeCategory(e) {
     this.setState({
       category: e.target.value
     })
   }
 
+  onChangeLanguage(e) {
+    this.setState({
+      language: e.target.value
+    })
+  }
+
   onChangeReadByMar(e) {
     this.setState({
       readByMar: !this.state.readByMar
-  });
-}
+    });
+  }
+
+  onChangeReadByAnd() {
+    this.setState({
+      readByAnd: !this.state.readByAnd
+    })
+  }
 
   onChangeDescription(e) {
     this.setState({
@@ -100,11 +127,14 @@ export default class EditBook extends Component {
 
     let book = new FormData();
     
-    const { title, category, readByMar, description, pages, cover } = this.state;
+    const { title, author, category, language, readByMar, readByAnd, description, pages, cover } = this.state;
     const id = this.props.match.params.id;
     book.append("title", title);
+    book.append("author", author);
     book.append("category", category);
+    book.append("language", language);
     book.append("readByMar", readByMar);
+    book.append("readByAnd", readByAnd);
     book.append("description", description);
     book.append("pages", pages);
     book.append("cover", cover);
@@ -134,6 +164,15 @@ export default class EditBook extends Component {
               />
         </div>
         <div className="form-group"> 
+          <label>Author: </label>
+          <input type="text"
+              required
+              className="form-control"
+              value={this.state.author}
+              onChange={this.onChangeAuthor}
+              />
+        </div>
+        <div className="form-group"> 
           <label>Category: </label>
           <select ref="categoryInput"
               required
@@ -151,6 +190,15 @@ export default class EditBook extends Component {
           </select>
         </div>
         <div className="form-group"> 
+          <label>Language: </label>
+          <input type="text"
+              required
+              className="form-control"
+              value={this.state.language}
+              onChange={this.onChangeLanguage}
+              />
+        </div>
+        <div className="form-group"> 
           <label>Read By Maius: </label>
           <input type="checkbox"
               className="form-control"
@@ -158,6 +206,15 @@ export default class EditBook extends Component {
               checked={this.state.readByMar}
               value={this.state.readByMar}
               onChange={this.onChangeReadByMar}
+              />
+        </div>
+        <div className="form-group"> 
+          <label>Read by Andreea: </label>
+          <input type="checkbox"
+              className="form-control"
+              checked={this.state.readByAnd}
+              value={this.state.readByAnd}
+              onChange={this.onChangeReadByAnd}
               />
         </div>
         <div className="form-group"> 

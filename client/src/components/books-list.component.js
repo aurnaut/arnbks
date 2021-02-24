@@ -7,8 +7,11 @@ const Book = props => (
   <tr>
     <td><img style={{maxWidth:100, border: '1px solid', borderRadius: 5}} src={'/uploads/'+ props.book.cover} /></td>
     <td>{props.book.title}</td>
+    <td>{props.book.author}</td>
     <td>{props.book.category}</td>
+    <td>{props.book.language}</td>
     <td>{props.book.readByMar === true ? 'Yes': 'No'}</td>
+    <td>{props.book.readByAnd === true ? 'Yes': 'No'}</td>
     <td>{props.book.description}</td>
     <td>{props.book.pages}</td>
     <td>
@@ -92,8 +95,11 @@ export default class BooksList extends Component {
             <tr>
               <th>Cover</th>
               <th onClick={() => this.sortBy('title')} >Title</th>
+              <th onClick={() => this.sortBy('author')} >Author</th>
               <th onClick={() => this.sortBy('category')} >Category</th>
+              <th onClick={() => this.sortBy('language')} >Language</th>
               <th onClick={() => this.sortBy('readByMar')}> Read By Marius</th>
+              <th onClick={() => this.sortBy('readByAnd')}> Read By Andreea</th>
               <th>Description</th>
               <th onClick={() => this.sortBy('pages')}>Pages</th>
               <th>Actions</th>

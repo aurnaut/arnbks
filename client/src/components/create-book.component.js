@@ -6,8 +6,11 @@ export default class CreateBook extends Component {
     super(props);
 
     this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeAuthor = this.onChangeAuthor.bind(this);
     this.onChangeCategory = this.onChangeCategory.bind(this);
+    this.onChangeLanguage = this.onChangeLanguage.bind(this);
     this.onChangeReadByMar = this.onChangeReadByMar.bind(this);
+    this.onChangeReadByAnd = this.onChangeReadByAnd.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePages = this.onChangePages.bind(this);
     this.onChangeCover = this.onChangeCover.bind(this);
@@ -15,9 +18,12 @@ export default class CreateBook extends Component {
 
     this.state = {
       title: '',
+      author: '',
       category: '',
+      language: '',
       defaultCategory: null,
       readByMar: false,
+      readByAnd: false,
       description: '',
       pages: 0,
       cover: null,
@@ -48,15 +54,33 @@ export default class CreateBook extends Component {
     })
   }
 
+  onChangeAuthor(e) {
+    this.setState({
+      author: e.target.value
+    })
+  }
+
   onChangeCategory(e) {
     this.setState({
       category: e.target.value
     })
   }
 
+  onChangeLanguage(e) {
+    this.setState({
+      language: e.target.value
+    })
+  }
+
   onChangeReadByMar() {
     this.setState({
       readByMar: !this.state.readByMar
+    })
+  }
+
+  onChangeReadByAnd() {
+    this.setState({
+      readByAnd: !this.state.readByAnd
     })
   }
 
@@ -101,10 +125,13 @@ export default class CreateBook extends Component {
     e.preventDefault();
 
     let book = new FormData();
-    const { title, category, description, pages, cover, readByMar } = this.state;
+    const { title, author, category, language, description, pages, cover, readByMar, readByAnd } = this.state;
     book.append("title", title);
+    book.append("author", author);
     book.append("category", category);
+    book.append("language", language);
     book.append("readByMar", readByMar);
+    book.append("readByAnd", readByAnd);
     book.append("description", description);
     book.append("pages", pages);
     book.append("cover", cover);
@@ -133,6 +160,15 @@ export default class CreateBook extends Component {
               />
         </div>
         <div className="form-group"> 
+          <label>Author: </label>
+          <input type="text"
+              required
+              className="form-control"
+              value={this.state.author}
+              onChange={this.onChangeAuthor}
+              />
+        </div>
+        <div className="form-group"> 
           <label>Category: </label>
           <select ref="categoryInput"
               required
@@ -149,7 +185,15 @@ export default class CreateBook extends Component {
               }
           </select>
         </div>
-
+        <div className="form-group"> 
+          <label>Language: </label>
+          <input type="text"
+              required
+              className="form-control"
+              value={this.state.language}
+              onChange={this.onChangeLanguage}
+              />
+        </div>
         <div className="form-group"> 
           <label>Read by Marius: </label>
           <input type="checkbox"
@@ -159,7 +203,15 @@ export default class CreateBook extends Component {
               onChange={this.onChangeReadByMar}
               />
         </div>
-
+        <div className="form-group"> 
+          <label>Read by Andreea: </label>
+          <input type="checkbox"
+              className="form-control"
+              checked={this.state.readByAnd}
+              value={this.state.readByAnd}
+              onChange={this.onChangeReadByAnd}
+              />
+        </div>
         <div className="form-group"> 
           <label>Description: </label>
           <input type="text"
