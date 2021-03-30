@@ -5,7 +5,7 @@ import FilterResults from 'react-filter-search';
 
 const Book = props => (
   <tr>
-    <td><img style={{maxWidth:100, border: '1px solid', borderRadius: 5}} src={'/uploads/'+ props.book.cover} /></td>
+    <td><img style={{maxWidth:100, border: '1px solid', borderRadius: 5}} src={'https://www.marn.ro/arnbks/'+ props.book.cover} /></td>
     <td>{props.book.title}</td>
     <td>{props.book.author}</td>
     <td>{props.book.category}</td>

@@ -243,7 +243,7 @@ export default class EditBook extends Component {
               className="form-control" 
               onChange={this.onChangeCover}
           />
-              {this.state.isEditImage ? <img style={{maxWidth:100}} src={this.state.showImage}/> : <img style={{maxWidth:100}} src={'/uploads/'+this.state.showImage}/>}
+              {this.state.isEditImage ? <img style={{maxWidth:100}} src={this.state.showImage}/> : <img style={{maxWidth:100}} src={'https://www.marn.ro/arnbks/'+this.state.showImage}/>}
         </div>
 
         <div className="form-group">

@@ -1,17 +1,18 @@
 const router = require('express').Router();
 let Book = require('../models/book.model');
 const multer = require('multer');
-
-let storage = multer.diskStorage({
-  destination: './public/uploads',
-  filename: function(req, file, cb) {
-    cb(null, new Date().toISOString().replace(/:/g,'-')+file.originalname);
-  }
-});
-
+const FTPStorage = require('multer-ftp');
+ 
 const upload = multer({
-  storage: storage
-});
+  storage: new FTPStorage({
+    basepath: '/public_html/arnbks',
+    ftp: {
+      host: 'marn.ro',
+      user: 'marnro',
+      password: 'l4badecal'
+    }
+  })
+})
 
 router.route('/').get((req, res) => {
   Book.find()
@@ -28,7 +29,7 @@ router.post('/add', upload.single('cover'), (req, res) => {
   const readByAnd = req.body.readByAnd;
   const description = req.body.description;
   const pages = Number(req.body.pages);
-  const cover = (req.file) ? req.file.filename : null;
+  const cover = (req.file) ? (req.file.path).split("/").pop() : null;
 
   const newBook = new Book({
     title,
@@ -62,7 +63,7 @@ router.route('/:id').delete((req, res) => {
 router.put('/update/:id', upload.single('cover'), (req, res) => {
   Book.findById(req.params.id)
     .then(book => {
-      const coverUpdate = (req.file) ? req.file.filename : book.cover; //multer
+      const coverUpdate = (req.file) ? (req.file.path).split("/").pop() : book.cover; //multer
       book.title = req.body.title;
       book.author = req.body.author;
       book.category = req.body.category;
@@ -72,6 +73,7 @@ router.put('/update/:id', upload.single('cover'), (req, res) => {
       book.description = req.body.description;
       book.pages = Number(req.body.pages);
       book.cover = coverUpdate;
+      console.log(req.file);
       book.save()
         .then(() => res.json('Book updated!'))
         .catch(err => res.status(400).json('Error: ' + err));

@@ -75,7 +75,7 @@ class RandomBook extends Component {
             <li style={{listStyle: 'none', padding: 0, margin: 0}} key={unreadBooksByMar.title}>
               <p>
               <span>{i + 1}. </span>
-              <img className="small-cover-random" src={'/uploads/'+ unreadBooksByMar.cover} />
+              <img className="small-cover-random" src={'https://www.marn.ro/arnbks/'+ unreadBooksByMar.cover} />
               {unreadBooksByMar.title}</p>
             </li>
           ))}
