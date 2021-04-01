@@ -8,8 +8,8 @@ const upload = multer({
     basepath: '/public_html/arnbks',
     ftp: {
       host: 'marn.ro',
-      user: 'marnro',
-      password: 'l4badecal'
+      user: 'aaa',
+      password: 'bbb'
     }
   })
 })
