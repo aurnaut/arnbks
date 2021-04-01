@@ -2,14 +2,16 @@ const router = require('express').Router();
 let Book = require('../models/book.model');
 const multer = require('multer');
 const FTPStorage = require('multer-ftp');
+
+require('dotenv').config();
  
 const upload = multer({
   storage: new FTPStorage({
     basepath: '/public_html/arnbks',
     ftp: {
       host: 'marn.ro',
-      user: 'aaa',
-      password: 'bbb'
+      user: process.env.FTP_USER,
+      password: process.env.FTP_PASS
     }
   })
 })
