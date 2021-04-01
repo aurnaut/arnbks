@@ -27,14 +27,14 @@ const categoriesRouter = require('./routes/categories');
 app.use('/api/books', booksRouter);
 app.use('/api/categories', categoriesRouter);
 
-//Local usage
-app.use(express.static(path.join(__dirname, 'public')))
+// //Local usage
+// app.use(express.static(path.join(__dirname, 'public')))
 
 //Prod usage
-// app.use(express.static( 'client/build' ));
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')); // relative path
-// });
+app.use(express.static( 'client/build' ));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')); // relative path
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port:${port}`);
