@@ -28,7 +28,7 @@ app.use('/api/books', booksRouter);
 app.use('/api/categories', categoriesRouter);
 
 // //Local usage
-// app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 //Prod usage
 app.use(express.static( 'client/build' ));
